@@ -1,4 +1,4 @@
-package io.github.akalliokoski.fhircast.subscriber;
+package io.github.akalliokoski.fhircast.subscribe;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,16 +11,16 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 @Configuration
 public class SubscribeRouter {
     @Bean
-    public RouterFunction<ServerResponse> subscribeRoutes(SubscriptionHandler subscriptionHandler) {
+    public RouterFunction<ServerResponse> subscribeRoutes(SubscribeHandler subscribeHandler) {
         return RouterFunctions
                 .route(RequestPredicates.POST("/subscribe")
                                 .and(RequestPredicates.accept(MediaType.TEXT_PLAIN))
                                 .and(RequestPredicates.contentType(MediaType.APPLICATION_JSON)),
-                        subscriptionHandler::subscribe)
+                        subscribeHandler::subscribe)
                 .andRoute(RequestPredicates.POST("/unsubscribe")
                                 .and(RequestPredicates.accept(MediaType.TEXT_PLAIN))
                                 .and(RequestPredicates.contentType(MediaType.APPLICATION_JSON)),
-                        subscriptionHandler::unsubscribe);
+                        subscribeHandler::unsubscribe);
 
     }
 }

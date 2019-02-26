@@ -1,4 +1,4 @@
-package io.github.akalliokoski.fhircast.subscriber;
+package io.github.akalliokoski.fhircast.subscribe;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Component
-public class SubscriptionHandler {
+public class SubscribeHandler {
     public Mono<ServerResponse> subscribe(ServerRequest request) {
         return ServerResponse
                 .accepted()
@@ -21,20 +21,5 @@ public class SubscriptionHandler {
                 .accepted()
                 .contentType(MediaType.TEXT_PLAIN)
                 .body(BodyInserters.fromObject("unsubscribed"));
-    }
-
-    public Mono<ServerResponse> verifySubscription(ServerRequest request) {
-        String challenge = "hub.challenge"; // TODO: use parameter
-        return ServerResponse
-                .ok()
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromObject(challenge));
-    }
-
-    public Mono<ServerResponse> notifyEvent(ServerRequest request) {
-        return ServerResponse
-                .ok()
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(BodyInserters.fromObject(""));
     }
 }
