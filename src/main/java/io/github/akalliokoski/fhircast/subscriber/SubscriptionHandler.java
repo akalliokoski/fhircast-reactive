@@ -1,11 +1,13 @@
-package io.github.akalliokoski.fhircast.app;
+package io.github.akalliokoski.fhircast.subscriber;
 
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+@Component
 public class SubscriptionHandler {
     public Mono<ServerResponse> subscribe(ServerRequest request) {
         return ServerResponse
