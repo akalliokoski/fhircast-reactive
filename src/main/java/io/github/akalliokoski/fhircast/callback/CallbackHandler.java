@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 @Component
 public class CallbackHandler {
     public Mono<ServerResponse> verifySubscription(ServerRequest request) {
+        System.out.println("CALLBACK: verify sub");
         String challenge = "hub.challenge"; // TODO: use parameter
         return ServerResponse
                 .ok()
@@ -18,6 +19,7 @@ public class CallbackHandler {
     }
 
     public Mono<ServerResponse> notifyEvent(ServerRequest request) {
+        System.out.println("CALLBACK: event");
         return ServerResponse
                 .ok()
                 .contentType(MediaType.TEXT_PLAIN)
